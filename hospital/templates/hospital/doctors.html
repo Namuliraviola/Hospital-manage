@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctors</title>
+</head>
+<body>
+    <h1>Doctors</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Doctor</button>
+    </form>
+    <h2>Doctor List</h2>
+    <ul>
+        {% for doctor in doctors %}
+            <li>{{ doctor }} - {{ doctor.email }} - Available: {% if doctor.is_available %}Yes{% else %}No{% endif %}</li>
+        {% empty %}
+            <li>No doctors yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Patients</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Patient</button>
+    </form>
+    <h2>Patient List</h2>
+    <ul>
+        {% for patient in patients %}
+            <li>{{ patient.first_name }} {{ patient.last_name }} ({{ patient.gender }}) - {{ patient.email }} - DOB: {{ patient.date_of_birth }}</li>
+        {% empty %}
+            <li>No patients yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

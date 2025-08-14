@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointments</title>
+</head>
+<body>
+    <h1>Appointments</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Schedule Appointment</button>
+    </form>
+    <h2>Appointment List</h2>
+    <ul>
+        {% for appointment in appointments %}
+            <li>{{ appointment }} at {{ appointment.appointment_time }} - Status: {{ appointment.get_status_display }}</li>
+        {% empty %}
+            <li>No appointments yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>
